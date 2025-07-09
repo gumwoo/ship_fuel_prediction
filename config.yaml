@@ -1,0 +1,79 @@
+# 선박 연료 소비 예측 프로젝트 설정
+
+# 프로젝트 정보
+project:
+  name: "Ship Fuel Consumption Prediction"
+  version: "1.0.0"
+  description: "AI-powered ship fuel consumption prediction system"
+  author: "ICT Intern Candidate for HD HyundaiSamho"
+
+# 데이터 소스 설정
+data_sources:
+  ais:
+    marinecadastre_url: "https://marinecadastre.gov/ais/"
+    data_years: [2020, 2021, 2022, 2023]
+    regions: ["US_East_Coast", "US_West_Coast", "Gulf_of_Mexico"]
+  
+  weather:
+    openmeteo_base_url: "https://marine-api.open-meteo.com/v1/marine"
+    variables: ["wave_height", "wind_speed_10m", "wind_direction_10m", "swell_wave_height"]
+    forecast_days: 7
+
+# 모델 설정
+model:
+  lstm:
+    hidden_size: 128
+    num_layers: 2
+    dropout: 0.2
+    sequence_length: 48  # 48시간 (2일)
+    batch_size: 32
+    learning_rate: 0.001
+    epochs: 100
+    
+  attention:
+    num_heads: 8
+    embed_dim: 128
+
+# 피처 설정
+features:
+  ais_features:
+    - "latitude"
+    - "longitude" 
+    - "speed_over_ground"
+    - "course_over_ground"
+    - "vessel_length"
+    - "vessel_width"
+    - "vessel_type"
+    
+  weather_features:
+    - "wave_height"
+    - "wind_speed"
+    - "wind_direction"
+    - "swell_height"
+    
+  engineered_features:
+    - "hour_of_day"
+    - "day_of_week"
+    - "season"
+    - "speed_change_rate"
+    - "course_change_rate"
+
+# 파일 경로
+paths:
+  raw_data: "data/raw/"
+  processed_data: "data/processed/"
+  models: "data/models/"
+  logs: "logs/"
+
+# Streamlit 앱 설정
+streamlit:
+  title: "선박 연료 소비 예측 시스템"
+  subtitle: "HD현대삼호 스마트 조선소를 위한 AI 솔루션"
+  theme: "dark"
+  layout: "wide"
+
+# 로깅 설정
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/ship_fuel_prediction.log"
