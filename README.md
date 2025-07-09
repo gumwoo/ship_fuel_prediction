@@ -1,175 +1,148 @@
-# 🚢 Ship Fuel Consumption Prediction System
+# 🚢 선박 연료 소비 예측 시스템
 
-AI-powered marine fuel consumption prediction system using real-world AIS data and weather conditions.
+실제 AIS 데이터와 기상 조건을 활용한 AI 기반 해양 연료 소비 예측 시스템
 
-## 📋 Project Overview
+## 📋 프로젝트 개요
 
-This project aims to predict ship fuel consumption using machine learning models trained on actual Automatic Identification System (AIS) data combined with real-time marine weather data. The system can help optimize fuel efficiency and reduce operational costs in the maritime industry.
+이 프로젝트는 실제 자동식별시스템(AIS) 데이터와 실시간 해양 기상 데이터를 결합한 머신러닝 모델을 통해 선박의 연료 소비를 예측하는 것을 목표로 합니다. 이 시스템은 해운업계의 연료 효율성 최적화와 운영 비용 절감에 도움을 줄 수 있습니다.
 
-### 🎯 Key Features
+### 🎯 주요 특징
 
-- **Real-world Data**: 24.7M AIS records from global shipping routes
-- **Weather Integration**: Real-time marine weather data from 74 representative locations
-- **Intelligent Sampling**: 99.1% data compression while maintaining quality
-- **Advanced Feature Engineering**: 19 specialized features based on marine physics
-- **Production Ready**: Scalable architecture for real-world deployment
+- **실제 데이터**: 전 세계 해운 항로의 2,470만 건 AIS 레코드
+- **기상 데이터 통합**: 74개 대표 지점의 실시간 해양 기상 데이터
+- **지능형 샘플링**: 품질을 유지하면서 99.1% 데이터 압축
+- **고급 특성 공학**: 해양 물리학 기반 19개 특수 특성
+- **운영 준비**: 실제 배포를 위한 확장 가능한 아키텍처
 
-## 🏗️ Architecture
+## 🏗️ 시스템 구조
 
 ```
-Data Collection → Intelligent Sampling → Feature Engineering → Model Training → Web Application
-     ↓                    ↓                    ↓                   ↓               ↓
-AIS (24.7M) →        496K Records →     19 Features →        LSTM Model →    Streamlit App
-Weather API →        1,776 Hours →      Physics-based →     + Attention →    Live Demo
+데이터 수집 → 지능형 샘플링 → 특성 공학 → 모델 훈련 → 웹 애플리케이션
+     ↓              ↓              ↓           ↓             ↓
+AIS (2,470만) → 49.6만 레코드 → 19개 특성 → LSTM 모델 → Streamlit 앱
+기상 API →     1,776시간 →    물리학 기반 → + Attention → 라이브 데모
 ```
 
-## 📊 Data Sources
+## 📊 데이터 소스
 
-### AIS (Automatic Identification System) Data
-- **Source**: MarineCadastre.gov (Official US Coast Guard data)
-- **Scale**: 24.7 million records (7 days)
-- **Coverage**: Global shipping routes
-- **Features**: Position, speed, vessel specifications, vessel type
+### AIS (자동식별시스템) 데이터
+- **출처**: MarineCadastre.gov (미국 해안경비대 공식 데이터)
+- **규모**: 2,470만 레코드 (7일간)
+- **범위**: 전 세계 해운 항로
+- **특성**: 위치, 속도, 선박 사양, 선박 유형
 
-### Marine Weather Data
-- **Source**: Open-Meteo Marine API
-- **Coverage**: 74 representative marine locations
-- **Duration**: 1,776 hours (7 days × 24 hours)
-- **Features**: Wave height, wind speed, ocean currents, sea temperature
+### 해양 기상 데이터
+- **출처**: Open-Meteo Marine API
+- **범위**: 74개 대표 해양 지점
+- **기간**: 1,776시간 (7일 × 24시간)
+- **특성**: 파고, 풍속, 해류, 해수 온도
 
-## 🚀 Quick Start
+## 🚀 빠른 시작
 
-### Prerequisites
+### 요구사항
 ```bash
 Python 3.9+
 pandas, numpy, scikit-learn
 requests, PyYAML
-streamlit, plotly (for web app)
+streamlit, plotly (웹 앱용)
 ```
 
-### Installation
+### 설치
 ```bash
-git clone https://github.com/gumwoo/ship-fuel-prediction.git
+git clone https://github.com/gumwoo/ship_fuel_prediction.git
 cd ship-fuel-prediction
 pip install -r requirements.txt
 ```
 
-### Data Processing
+### 데이터 처리
 ```bash
-# 1. Analyze AIS data
+# 1. AIS 데이터 분석
 python ais_eda_analysis.py
 
-# 2. Collect weather data
+# 2. 기상 데이터 수집
 python smart_weather_collection.py
 
-# 3. Intelligent sampling
+# 3. 지능형 샘플링
 python smart_ais_sampling.py
 ```
 
-## 📁 Project Structure
+## 📁 프로젝트 구조
 
 ```
 ship-fuel-prediction/
 ├── data/
-│   ├── raw/                    # Raw AIS and weather data
-│   ├── processed/              # Processed and sampled data
-│   └── models/                 # Trained model files
+│   ├── raw/                    # 원시 AIS 및 기상 데이터
+│   ├── processed/              # 처리된 샘플링 데이터
+│   └── models/                 # 훈련된 모델 파일
 ├── src/
-│   ├── data_collection/        # Data collection modules
-│   ├── preprocessing/          # Data preprocessing
-│   ├── models/                 # ML model implementations
-│   └── webapp/                 # Streamlit web application
-├── docs/                       # Project documentation
-├── tests/                      # Unit tests
-└── notebooks/                  # Jupyter notebooks for analysis
+│   ├── data_collection/        # 데이터 수집 모듈
+│   ├── preprocessing/          # 데이터 전처리
+│   ├── models/                 # ML 모델 구현
+│   └── webapp/                 # Streamlit 웹 애플리케이션
+├── docs/                       # 프로젝트 문서
+├── tests/                      # 단위 테스트
+└── notebooks/                  # 분석용 Jupyter 노트북
 ```
 
-## 🔬 Technical Approach
+## 🔬 기술적 접근법
 
-### Intelligent Data Sampling
-- **Challenge**: 24.7M records exceed memory limits
-- **Solution**: Multi-dimensional stratified sampling
-- **Result**: 99.1% compression (24.7M → 496K) with quality preservation
+### 지능형 데이터 샘플링
+- **문제**: 2,470만 레코드는 메모리 한계 초과
+- **해결책**: 다차원 층화 샘플링
+- **결과**: 99.1% 압축 (2,470만 → 49.6만) 품질 보존
 
-### Feature Engineering
-Based on marine engineering principles:
-- **Speed Cubed**: Fuel consumption ∝ Speed³ (ship resistance theory)
-- **Vessel Characteristics**: Size, type, and operational patterns
-- **Weather Impact**: Wave height, wind resistance, current effects
-- **Temporal Patterns**: Time-of-day and seasonal variations
+### 특성 공학
+해양공학 원리 기반:
+- **속도 세제곱**: 연료 소비 ∝ 속도³ (선박 저항 이론)
+- **선박 특성**: 크기, 유형, 운항 패턴
+- **기상 영향**: 파고, 바람 저항, 해류 효과
+- **시간적 패턴**: 시간대 및 계절별 변화
 
-### Model Architecture (Planned)
-- **LSTM + Attention**: For temporal sequence modeling
-- **Physics-Informed**: Incorporating maritime engineering constraints
-- **Interpretable AI**: SHAP values for prediction explanation
+### 모델 아키텍처 (계획)
+- **LSTM + Attention**: 시계열 시퀀스 모델링
+- **물리학 정보**: 해양공학 제약 조건 포함
+- **해석 가능한 AI**: 예측 설명을 위한 SHAP 값
 
-## 📈 Performance Metrics
+## 📈 성능 지표
 
-### Data Quality
-- **AIS Data**: 95% completeness for essential features
-- **Weather Data**: 93-96% valid data rate across variables
-- **Sampling Quality**: 99% preservation of original distribution
+### 데이터 품질
+- **AIS 데이터**: 필수 특성 95% 완성도
+- **기상 데이터**: 변수별 93-96% 유효 데이터율
+- **샘플링 품질**: 원본 분포 99% 보존
 
-### Model Performance (Target)
-- **Accuracy**: MAE < 5% for fuel consumption prediction
-- **Speed**: Real-time prediction (<3 seconds)
-- **Coverage**: Support for 10+ vessel types
+### 모델 성능 (목표)
+- **정확도**: 연료 소비 예측 MAE < 5%
+- **속도**: 실시간 예측 (<3초)
+- **범위**: 10개 이상 선박 유형 지원
 
-## 🛠️ Development Progress
+## 🛠️ 개발 진행 상황
 
-- [x] **Data Collection**: AIS (24.7M) + Weather (1,776h) ✅
-- [x] **Data Quality**: EDA and quality validation ✅
-- [x] **Intelligent Sampling**: 99.1% compression achieved ✅
-- [x] **Feature Engineering**: 19 specialized features ✅
-- [ ] **Data Matching**: AIS-Weather spatial-temporal matching
-- [ ] **Model Development**: LSTM + Attention implementation
-- [ ] **Web Application**: Streamlit dashboard
-- [ ] **Deployment**: Production-ready deployment
+- [x] **데이터 수집**: AIS (2,470만) + 기상 (1,776시간) ✅
+- [x] **데이터 품질**: EDA 및 품질 검증 ✅
+- [x] **지능형 샘플링**: 99.1% 압축 달성 ✅
+- [x] **특성 공학**: 19개 특수 특성 ✅
+- [ ] **데이터 매칭**: AIS-기상 시공간 매칭
+- [ ] **모델 개발**: LSTM + Attention 구현
+- [ ] **웹 애플리케이션**: Streamlit 대시보드
+- [ ] **배포**: 운영 준비 배포
 
-## 🧪 Key Innovations
+## 🧪 주요 혁신 사항
 
-1. **Real-World Scale**: Processing 24.7M actual shipping records
-2. **Physics-Informed ML**: Incorporating maritime engineering principles
-3. **Multi-Source Integration**: Combining AIS and weather data
-4. **Production Ready**: Designed for real maritime operations
+1. **실제 규모**: 2,470만 건 실제 선박 레코드 처리
+2. **물리학 정보 ML**: 해양공학 원리 포함
+3. **다중 소스 통합**: AIS와 기상 데이터 결합
+4. **운영 준비**: 실제 해양 운영을 위한 설계
 
-## 📊 Sample Results
+## 📊 샘플 결과
 
-### Data Distribution
-- **Vessels**: 18,397 unique ships
-- **Geographic Coverage**: Latitude 0.33°-51.42°, Longitude -165°--61°
-- **Vessel Types**: Cargo (37%), Tanker (31%), Fishing (52%), etc.
-- **Speed Range**: 0-95 knots (avg 4.4 knots)
+### 데이터 분포
+- **선박**: 18,397척 고유 선박
+- **지리적 범위**: 위도 0.33°-51.42°, 경도 -165°--61°
+- **선박 유형**: 화물선 (37%), 유조선 (31%), 어선 (52%) 등
+- **속도 범위**: 0-95노트 (평균 4.4노트)
 
-### Fuel Consumption Estimates
-- **Range**: 0.1-500 tons/day
-- **Average**: 30.6 tons/day
-- **Factors**: Vessel size, speed³, weather conditions
+### 연료 소비 추정
+- **범위**: 0.1-500톤/일
+- **평균**: 30.6톤/일
+- **요인**: 선박 크기, 속도³, 기상 조건
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **MarineCadastre.gov** for providing comprehensive AIS data
-- **Open-Meteo** for marine weather API access
-- **Maritime engineering research** for fuel consumption modeling principles
-
-## 📞 Contact
-
-For questions and collaboration opportunities:
-- GitHub: [@gumwoo](https://github.com/gumwoo)
-- Project Link: [https://github.com/gumwoo/ship-fuel-prediction](https://github.com/gumwoo/ship-fuel-prediction)
-
----
-
-**🚀 Transforming Maritime Operations with AI-Powered Fuel Optimization**
