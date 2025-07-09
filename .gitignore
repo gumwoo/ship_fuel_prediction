@@ -127,7 +127,6 @@ dmypy.json
 # ==========================================
 
 # Data files and folders - NEVER COMMIT
-data/
 docs/
 *.csv
 *.parquet
